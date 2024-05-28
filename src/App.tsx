@@ -14,6 +14,9 @@ function App() {
     const repaymentTime = mortgageInfo.repaymentTime;
     const monthlyRate = interestRate / 12;
     const numberOfPayments = repaymentTime * 12;
+    if (interestRate === 0) {
+      return loanAmount / numberOfPayments;
+    }
     const monthlyPayment =
       (loanAmount * monthlyRate) /
       (1 - Math.pow(1 + monthlyRate, -numberOfPayments));
@@ -28,6 +31,7 @@ function App() {
           min={0}
           max={1000000}
           displayName="Purchase Price"
+          unitSymbol="$"
         />
         <Slider
           value={0}
@@ -35,13 +39,14 @@ function App() {
           min={0}
           max={1000000}
           name="downPayment"
+          unitSymbol="$"
         />
         <Slider
           value={0}
           displayName="Repayment Time"
           min={0}
           max={30}
-          unitSymbol={"years"}
+          unitSymbol="years"
           name="repaymentTime"
         />
         <Slider
